@@ -38,8 +38,8 @@
 .nav_link_opt {
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .nav_link_opt_1 {
@@ -52,11 +52,12 @@
 }
 
 .nav_link_basket {
+  margin-left: 15px;
   display: flex;
   align-items: center;
 }
 
 .nav_link_basket_count {
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 15px;
 }
