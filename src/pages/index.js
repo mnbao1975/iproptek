@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import { listProducts } from "../graphql/queries";
 import styles from "../styles/Home.module.css";
 import { Header, ProductCard } from "../components";
@@ -13,8 +13,13 @@ export default function Home() {
 
   async function fetchProducts() {
     const productsObj = await API.graphql({ query: listProducts });
-    console.log(productsObj);
-    setProducts(productsObj.data.listProducts.items);
+    const productsList = productsObj.data.listProducts.items;
+    let updatedProcducts = [];
+    for (let i = 0; i < productsList.length; i++) {
+      let image = await Storage.get(productsList[i].image);
+      updatedProcducts.push({ ...productsList[i], image });
+    }
+    setProducts(updatedProcducts);
   }
 
   return (
@@ -76,18 +81,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const productsObj = await API.graphql({ query: listProducts });
-  console.log(productsObj);
-  setProducts(productsObj.data.listProducts.items);
-
-  const post = await API.graphql({ query: getPost, variables: { id } });
-  console.log({ post: JSON.stringify(post) });
-  return {
-    props: {
-      post: post.data.getPost,
-    },
-  };
 }
