@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProductCard({ id, title, descrpition, image, price }) {
+export default function ProductCard({ id, title, description, image, price }) {
   const classes = useStyles();
 
   return (
@@ -48,7 +48,7 @@ export default function ProductCard({ id, title, descrpition, image, price }) {
           ${price}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          {descrpition}
+          {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

@@ -1,6 +1,6 @@
 {
     "identityPoolName": "iproptekd672cf00_identitypool_d672cf00",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "iproptd672cf00",
     "userPoolName": "iproptekd672cf00_userpool_d672cf00",
     "autoVerifiedAttributes": [
