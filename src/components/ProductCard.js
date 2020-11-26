@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -9,6 +8,10 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+
+import { useContext } from "react";
+import { ShoppingContext } from "../contexts/ShoppingContext";
+import { HeaderContext } from "../contexts/HeaderContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +39,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductCard({ id, title, description, image, price }) {
   const classes = useStyles();
+  const { addToCartEvent } = useContext(ShoppingContext);
+  const { cartCounter, setCartCounter } = useContext(HeaderContext);
 
+  const onClickHandler = () => {
+    setCartCounter(cartCounter + 1);
+    addToCartEvent({ id, title, description, image, price });
+  };
   return (
     <Card className={classes.root}>
       <CardMedia className={classes.media} image={image} title={title} />
@@ -56,9 +65,7 @@ export default function ProductCard({ id, title, description, image, price }) {
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="add to favorites">
-          <Link href="/checkout">
-            <AddShoppingCartIcon />
-          </Link>
+          <AddShoppingCartIcon onClick={onClickHandler} />
         </IconButton>
       </CardActions>
     </Card>

@@ -1,16 +1,17 @@
 import Amplify from "aws-amplify";
 import config from "../../src/aws-exports";
+import { HeaderProvider } from "../contexts/HeaderContext";
 import "../styles/globals.css";
-import { Header } from "../components";
 
 Amplify.configure({ ...config, ssr: true });
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div>
-      {/* <Header /> */}
-      <Component {...pageProps} />
-    </div>
+    <HeaderProvider>
+      <div>
+        <Component {...pageProps} />
+      </div>
+    </HeaderProvider>
   );
 }
 

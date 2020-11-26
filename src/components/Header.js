@@ -3,10 +3,12 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import Link from "next/link";
 import { Auth } from "aws-amplify";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { HeaderContext } from "../contexts/HeaderContext";
 
 function Header() {
   const [user, setUser] = useState(null);
+  const { cartCounter, setCartCounter } = useContext(HeaderContext);
   useEffect(() => {
     // Access the user session on the client
     Auth.currentAuthenticatedUser()
@@ -14,7 +16,7 @@ function Header() {
         setUser(user);
       })
       .catch((err) => setUser(null));
-  }, [user]);
+  }, []);
 
   return (
     <div className={styles.header}>
@@ -67,7 +69,7 @@ function Header() {
                   styles.nav_link_basket_count,
                 ].join(" ")}
               >
-                0
+                {cartCounter}
               </span>
             </div>
           </a>
